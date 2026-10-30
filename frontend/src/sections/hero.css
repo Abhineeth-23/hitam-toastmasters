@@ -1,0 +1,215 @@
+.hero {
+  --voice: 0;
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-top: calc(var(--header-h) + 12px);
+  padding-bottom: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ink);
+  color: #edebe6;
+}
+
+.hero__stage {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.hero__canvas {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.hero__fallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 50% 70%, rgba(242, 223, 116, 0.18), transparent 70%),
+    radial-gradient(70% 60% at 20% 100%, rgba(119, 36, 50, 0.4), transparent 70%),
+    var(--ink);
+}
+.hero__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% 40%, transparent 50%, rgba(5, 8, 13, 0.85)),
+    linear-gradient(180deg, rgba(5, 8, 13, 0.75), transparent 28%, transparent 70%, rgba(5, 8, 13, 0.9));
+}
+
+.hero__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 18px;
+}
+
+.hero__title {
+  align-self: center;
+  display: grid;
+  pointer-events: none;
+  margin-top: -4vh;
+  will-change: transform;
+}
+.hero__find {
+  display: block;
+  font-size: clamp(3rem, 9vw, 9.5rem);
+  line-height: 1;
+  color: var(--cool);
+  padding-left: 0.4vw;
+}
+.hero__mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+}
+.hero__word {
+  display: inline-block;
+}
+.hero__voice {
+  display: block;
+  font-size: clamp(6rem, 27vw, 30rem);
+  line-height: 0.78;
+  letter-spacing: -0.06em;
+  margin-left: -0.04em;
+  padding-bottom: 0.04em;
+  color: #f6f1e6;
+  text-shadow: 0 0 calc(var(--voice) * 80px) rgba(242, 223, 116, calc(var(--voice) * 0.9));
+  transform: scale(calc(1 + var(--voice) * 0.03));
+  transform-origin: left bottom;
+  transition: transform 0.12s linear;
+}
+.hero__voice .px__c:nth-child(2) {
+  color: var(--yellow);
+}
+
+.hero__bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 24px;
+}
+.hero__intro {
+  display: grid;
+  gap: 18px;
+  max-width: 440px;
+}
+.hero__intro p {
+  color: #c9cdcf;
+}
+.hero__ctas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.hero__next {
+  justify-self: end;
+  text-align: right;
+}
+.hero__next .countdown-compact {
+  font-size: 1rem;
+  color: #edebe6;
+}
+
+.hero__mic {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 20px 10px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: left;
+  transition: border-color 0.4s, background-color 0.4s;
+}
+.hero__mic:hover {
+  border-color: var(--yellow);
+}
+.hero__mic:disabled {
+  opacity: 0.6;
+}
+.hero__mic-icon {
+  --level: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink);
+}
+.hero__mic-icon::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--yellow);
+  opacity: calc(0.15 + var(--level));
+  transform: scale(calc(1 + var(--level) * 0.6));
+  transition: transform 0.08s linear;
+}
+.mic--off .hero__mic-icon::before {
+  animation: micPulse 2.4s var(--ease) infinite;
+}
+@keyframes micPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.mic--on .hero__mic-icon {
+  background: var(--stop);
+  color: #fff;
+}
+.mic--on .hero__mic-icon::before {
+  border-color: var(--stop);
+}
+.hero__mic-text {
+  display: grid;
+  gap: 2px;
+  font-size: 0.9rem;
+}
+.hero__mic-text .mono {
+  color: var(--muted);
+  font-size: 0.62rem;
+}
+
+@media (max-width: 960px) {
+  .hero__bar {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .hero__next {
+    justify-self: start;
+    text-align: left;
+  }
+  .hero__college {
+    display: none;
+  }
+}
+
+.hero__notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  background: rgba(242, 223, 116, 0.1);
+  border: 1px solid rgba(242, 223, 116, 0.35);
+  font-size: 0.85rem;
+  max-width: 60vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hero__notice .mono {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 0.6rem;
+}

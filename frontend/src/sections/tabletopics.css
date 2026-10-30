@@ -1,0 +1,161 @@
+.tt {
+  --glow: rgba(242, 223, 116, 0.1);
+  position: relative;
+  overflow: hidden;
+  color: var(--fg);
+}
+.tt--green { --glow: color-mix(in srgb, var(--go) 45%, transparent); }
+.tt--yellow { --glow: rgba(242, 223, 116, 0.5); }
+.tt--red { --glow: rgba(229, 72, 77, 0.6); }
+
+.tt__glow {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background: radial-gradient(50% 50% at 70% 50%, var(--glow), transparent 70%);
+  transition: background 1.2s var(--ease);
+}
+.tt--red .tt__glow {
+  animation: alarm 1s ease-in-out infinite alternate;
+}
+@keyframes alarm {
+  to { opacity: 0.55; }
+}
+
+.tt__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(40px, 6vw, 110px);
+  align-items: center;
+}
+.tt__copy {
+  display: grid;
+  gap: 24px;
+}
+.tt__title {
+  font-size: var(--fs-xl);
+}
+.tt__title .serif {
+  display: block;
+  color: var(--accent);
+}
+.tt__lede {
+  max-width: 44ch;
+  color: color-mix(in srgb, var(--fg) 82%, transparent);
+}
+.tt__rules {
+  display: grid;
+  gap: 10px;
+}
+.tt__rules li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tt__rules i,
+.tt__lights i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.tt__rules .g { background: var(--go); }
+.tt__rules .y { background: var(--warn); }
+.tt__rules .r { background: var(--stop); }
+
+.tt__machine {
+  display: grid;
+  gap: 20px;
+}
+.tt__window {
+  --item: clamp(150px, 15vw, 210px);
+  position: relative;
+  height: var(--item);
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
+.tt__reel {
+  will-change: transform;
+}
+.tt__topic {
+  height: var(--item);
+  display: flex;
+  align-items: center;
+  padding-inline: clamp(20px, 3vw, 44px);
+  font-size: clamp(1.5rem, 2.6vw, 2.6rem);
+  line-height: 1.1;
+}
+.tt__shade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22%;
+  pointer-events: none;
+}
+.tt__shade--t {
+  top: 0;
+  background: linear-gradient(180deg, rgba(20, 3, 8, 0.8), transparent);
+}
+.tt__shade--b {
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(20, 3, 8, 0.8), transparent);
+}
+
+.tt__panel {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.2);
+}
+.tt__clock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.tt__lights {
+  display: flex;
+  gap: 12px;
+}
+.tt__lights i {
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.3s, box-shadow 0.4s;
+}
+.tt--green .tt__lights .g { background: var(--go); box-shadow: 0 0 30px var(--go); }
+.tt--yellow .tt__lights .y { background: var(--warn); box-shadow: 0 0 30px var(--warn); }
+.tt--red .tt__lights .r { background: var(--stop); box-shadow: 0 0 30px var(--stop); }
+.tt__time {
+  font-size: clamp(2.6rem, 5vw, 4.6rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.tt__verdict {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--accent);
+  min-height: 1.6em;
+}
+.tt__btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tt__btns .btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  .tt__grid {
+    grid-template-columns: 1fr;
+  }
+}

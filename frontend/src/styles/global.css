@@ -1,0 +1,452 @@
+/* ==========================================================================
+   HITAM Toastmasters — design tokens & base
+   Palette from the Toastmasters International brand manual (v2.0):
+   Loyal Blue #004165 · True Maroon #772432 · Cool Gray #A9B2B1 · Happy Yellow #F2DF74
+   HITAM Green #208840 (sampled from the HITAM logo) marks the college itself:
+   campus, venue and co-branding. Use it sparingly; yellow stays the main accent.
+   ========================================================================== */
+
+:root {
+  --hitam: #208840;
+  --hitam-deep: #145c2b;
+  --loyal: #004165;
+  --blissful: #006094;
+  --maroon: #772432;
+  --maroon-rich: #781327;
+  --maroon-deep: #3b0104;
+  --cool: #a9b2b1;
+  --fair: #f5f5f5;
+  --yellow: #f2df74;
+
+  --ink: #05080d;
+  --night: #071624;
+  --paper: #efebe3;
+
+  /* timing lights; green shares HITAM's hue so there's one green on the site */
+  --go: #34c560;
+  --warn: #f2df74;
+  --stop: #e5484d;
+
+  --font-display: 'Montserrat Variable', 'Montserrat', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  --fs-mega: clamp(4.2rem, 16vw, 20rem);
+  --fs-xxl: clamp(3rem, 9.5vw, 10rem);
+  --fs-xl: clamp(2.4rem, 6.2vw, 6.4rem);
+  --fs-l: clamp(1.8rem, 3.6vw, 3.4rem);
+  --fs-m: clamp(1.2rem, 1.9vw, 1.7rem);
+  --fs-body: clamp(1rem, 1.05vw, 1.125rem);
+  --fs-s: 0.875rem;
+  --fs-xs: 0.72rem;
+
+  --gutter: clamp(16px, 4vw, 56px);
+  --header-h: 76px;
+  --radius: 18px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.7, 0, 0.15, 1);
+
+  /* Theme (scroll-driven, see useSectionThemes) */
+  --bg: var(--ink);
+  --fg: #edebe6;
+  --muted: #8d969b;
+  --line: rgba(237, 235, 230, 0.14);
+  --accent: var(--yellow);
+  --card: rgba(255, 255, 255, 0.035);
+  /* HITAM green tuned for legibility on the current background */
+  --campus: #3cae62;
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --bg: var(--paper);
+  --fg: #0b1720;
+  --muted: #5b666e;
+  --line: rgba(11, 23, 32, 0.15);
+  --accent: var(--maroon);
+  --card: rgba(11, 23, 32, 0.04);
+  --campus: var(--hitam);
+  color-scheme: light;
+}
+:root[data-theme='maroon'] {
+  --bg: #3f0b16;
+  --fg: #f6eee6;
+  --muted: #d1a9ae;
+  --line: rgba(246, 238, 230, 0.18);
+  --accent: var(--yellow);
+  --card: rgba(255, 255, 255, 0.05);
+  --campus: #5cc27d;
+}
+:root[data-theme='blue'] {
+  --bg: #002b43;
+  --fg: #eef3f5;
+  --muted: #9ab4c2;
+  --line: rgba(238, 243, 245, 0.16);
+  --accent: var(--yellow);
+  --card: rgba(255, 255, 255, 0.05);
+  --campus: #4fbb72;
+}
+:root[data-theme='yellow'] {
+  --bg: var(--yellow);
+  --fg: #1c0a0e;
+  --muted: #5d4a2a;
+  --line: rgba(28, 10, 14, 0.18);
+  --accent: var(--maroon);
+  --card: rgba(28, 10, 14, 0.05);
+  --campus: var(--hitam-deep);
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  font-feature-settings: 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.8s var(--ease),
+    color 0.8s var(--ease);
+  overflow-x: clip;
+}
+
+img,
+svg,
+canvas,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  padding-inline: var(--gutter);
+  margin-inline: auto;
+  max-width: 1680px;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eyebrow::before {
+  content: '';
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+/* Green dot = this is about HITAM / the campus */
+.eyebrow--campus::before {
+  background: var(--campus);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--campus) 70%, transparent);
+}
+
+.campus {
+  color: var(--campus);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background: var(--yellow);
+  color: var(--ink);
+  border-radius: 999px;
+  transform: translateY(-200%);
+  transition: transform 0.3s var(--ease);
+}
+.skip-link:focus {
+  transform: none;
+}
+
+.rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+  margin: 0;
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(96px, 14vw, 220px);
+}
+
+/* line-mask for SplitText reveals */
+.split-mask {
+  overflow: clip;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 900;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1.2s steps(6) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -4%); }
+  60% { transform: translate(-4%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Pill button */
+.btn {
+  --btn-bg: var(--fg);
+  --btn-fg: var(--bg);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 1em 1.6em;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.5s var(--ease);
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--yellow);
+  border-radius: inherit;
+  transform: translateY(101%);
+  transition: transform 0.6s var(--ease);
+}
+.btn:hover::before {
+  transform: none;
+}
+.btn:hover {
+  color: var(--ink);
+}
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.btn .arrow {
+  display: inline-block;
+  transition: transform 0.5s var(--ease);
+}
+.btn:hover .arrow {
+  transform: translateX(4px) rotate(-45deg);
+}
+
+/* Timing-light dot */
+.light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 0 currentColor;
+}
+
+/* Inputs */
+.field {
+  display: grid;
+  gap: 8px;
+}
+.field label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 14px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  font-size: 1.15rem;
+  outline: none;
+  transition: border-color 0.4s var(--ease);
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+/* an unchosen select reads like a placeholder, not a value */
+.field select:has(option[value='']:checked) {
+  color: color-mix(in srgb, var(--muted) 70%, transparent);
+}
+.field select option {
+  background: var(--night);
+  color: #fff;
+}
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .grain {
+    animation: none;
+  }
+}

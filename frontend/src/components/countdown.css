@@ -1,0 +1,30 @@
+.countdown__digits {
+  display: flex;
+  gap: clamp(10px, 2vw, 28px);
+  font-family: var(--font-mono);
+}
+.countdown__unit {
+  display: grid;
+  gap: 4px;
+}
+.countdown__num {
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+.countdown__lbl {
+  color: var(--muted);
+}
+.countdown__when {
+  margin-top: 14px;
+  color: var(--muted);
+}
+.countdown__live {
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  color: var(--go);
+}
+.countdown-compact {
+  font-variant-numeric: tabular-nums;
+}

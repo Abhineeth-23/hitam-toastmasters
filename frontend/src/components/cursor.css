@@ -1,0 +1,89 @@
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+html.has-cursor input,
+html.has-cursor textarea {
+  cursor: text !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--yellow);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(242, 223, 116, 0.6);
+  transition:
+    width 0.5s var(--ease),
+    height 0.5s var(--ease),
+    margin 0.5s var(--ease),
+    background-color 0.5s var(--ease),
+    border-color 0.5s var(--ease);
+  mix-blend-mode: difference;
+}
+.cursor-ring[data-state='link'] {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: rgba(242, 223, 116, 0.12);
+}
+.cursor-ring[data-state='text'] {
+  width: 4px;
+  height: 28px;
+  margin: -14px 0 0 -2px;
+  border-radius: 2px;
+}
+.cursor-ring[data-state='label'] {
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  background: var(--yellow);
+  border-color: var(--yellow);
+  mix-blend-mode: normal;
+}
+.cursor-ring[data-state='label'][data-tone='maroon'] {
+  background: var(--maroon);
+  border-color: var(--maroon);
+}
+.cursor-ring[data-state='label'][data-tone='maroon'] .cursor-ring__label {
+  color: #fff;
+}
+
+.cursor-ring__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.5s var(--ease);
+}
+.cursor-ring[data-state='label'] .cursor-ring__label {
+  opacity: 1;
+  transform: none;
+}

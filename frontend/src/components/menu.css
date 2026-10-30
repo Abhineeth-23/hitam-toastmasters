@@ -1,0 +1,203 @@
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 650;
+  /* always a dark stage, whatever section the page was on */
+  --bg: #07070b;
+  --fg: #f6eee6;
+  --muted: #a39a9b;
+  --line: rgba(246, 238, 230, 0.14);
+  --accent: var(--yellow);
+  --campus: #3cae62;
+  color: var(--fg);
+  background:
+    radial-gradient(80% 70% at 85% 10%, rgba(119, 36, 50, 0.55), transparent 60%),
+    radial-gradient(60% 60% at 0% 100%, rgba(0, 65, 101, 0.6), transparent 60%),
+    #07070b;
+  overflow: hidden;
+  visibility: hidden;
+}
+.menu__spot {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(242, 223, 116, 0.1), transparent 65%);
+}
+
+.menu__inner {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 340px);
+  gap: clamp(24px, 5vw, 80px);
+  padding-top: calc(var(--header-h) + 3vh);
+  padding-bottom: 4vh;
+}
+
+.menu__nav {
+  align-self: center;
+}
+.menu__row {
+  overflow: hidden;
+  border-bottom: 1px solid rgba(246, 238, 230, 0.1);
+}
+.menu__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.2em 1fr auto;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.4vh 0;
+  transition: opacity 0.5s var(--ease), color 0.4s;
+}
+.has-hover .menu__item:not(.is-hover) {
+  opacity: 0.22;
+}
+.menu__idx {
+  color: var(--yellow);
+  opacity: 0.8;
+}
+.menu__label {
+  font-size: clamp(2.6rem, 7.4vh, 6.6rem);
+  line-height: 1.02;
+}
+.menu__item.is-current .menu__label {
+  color: var(--yellow);
+}
+.menu__item.is-current .menu__idx::after {
+  content: ' ●';
+  font-size: 0.7em;
+}
+.menu__blurb {
+  font-size: clamp(1rem, 1.6vw, 1.4rem);
+  color: var(--cool);
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s var(--ease), transform 0.6s var(--ease);
+}
+.menu__item.is-hover .menu__blurb,
+.menu__item:focus-visible .menu__blurb {
+  opacity: 1;
+  transform: none;
+}
+
+/* letter roll */
+.roll {
+  display: inline-flex;
+}
+.roll__c {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+  padding-bottom: 0.04em;
+}
+.roll__c > span {
+  display: block;
+  transition: transform 0.7s var(--ease);
+  transition-delay: var(--d);
+}
+.roll__c > span:last-child {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  color: var(--yellow);
+}
+.menu__item.is-hover .roll__c > span,
+.menu__item:focus-visible .roll__c > span {
+  transform: translateY(-100%);
+}
+
+.menu__aside {
+  align-self: end;
+  display: grid;
+  gap: 28px;
+  padding-bottom: 2vh;
+}
+.menu__meta p {
+  line-height: 1.45;
+}
+.menu__meta .eyebrow {
+  margin-bottom: 8px;
+}
+.menu__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(246, 238, 230, 0.12);
+}
+.menu__foot a {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.menu__foot a:hover {
+  opacity: 1;
+  color: var(--yellow);
+}
+.menu__admin {
+  color: var(--stop);
+}
+
+.menu__preview {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: clamp(200px, 20vw, 320px);
+  aspect-ratio: 4 / 5;
+  margin: calc(clamp(200px, 20vw, 320px) * -0.7) 0 0 48px;
+  pointer-events: none;
+  border-radius: 14px;
+  overflow: hidden;
+  opacity: 0;
+  scale: 0.6;
+  transition: opacity 0.4s var(--ease), scale 0.6s var(--ease);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+.menu__preview.is-on {
+  opacity: 1;
+  scale: 1;
+}
+.menu__preview-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.7s var(--ease);
+  filter: grayscale(1) contrast(1.15);
+}
+.menu__preview-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--tint);
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+.menu__preview-img.is-active {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (max-width: 900px) {
+  .menu__inner {
+    grid-template-columns: 1fr;
+    align-content: start;
+    overflow-y: auto;
+  }
+  .menu__nav {
+    align-self: start;
+  }
+  .menu__label {
+    font-size: clamp(1.9rem, 8.4vw, 4rem);
+  }
+  .menu__blurb {
+    display: none;
+  }
+  .menu__item {
+    grid-template-columns: 2.6em 1fr;
+  }
+  .menu__preview {
+    display: none;
+  }
+}

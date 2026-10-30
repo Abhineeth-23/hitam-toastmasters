@@ -1,0 +1,18 @@
+.tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt__glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, 0.35), transparent 45%);
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.tilt:hover .tilt__glare {
+  opacity: 1;
+}

@@ -1,0 +1,23 @@
+.odo {
+  display: inline-flex;
+  font-variant-numeric: tabular-nums;
+}
+.odo__digit {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  line-height: 1;
+}
+.odo__col {
+  display: flex;
+  flex-direction: column;
+}
+.odo__col > span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+.odo__static {
+  display: inline-block;
+  line-height: 1;
+}

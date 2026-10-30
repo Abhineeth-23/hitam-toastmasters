@@ -1,0 +1,61 @@
+.ph {
+  position: relative;
+  min-height: 92svh;
+  display: grid;
+  align-items: end;
+  padding-top: calc(var(--header-h) + 8vh);
+  padding-bottom: clamp(48px, 7vw, 100px);
+  overflow: hidden;
+}
+.ph__index {
+  position: absolute;
+  right: -0.06em;
+  top: 4vh;
+  font-size: clamp(14rem, 42vw, 46rem);
+  line-height: 0.8;
+  /* Outline via an opaque fill painted over a double-width stroke: the variable font's
+     overlapping contours would otherwise show as stray lines inside each glyph. */
+  color: var(--bg);
+  -webkit-text-stroke: 2px var(--line);
+  paint-order: stroke fill;
+  transition: color 0.8s var(--ease);
+  pointer-events: none;
+  user-select: none;
+}
+.ph__inner {
+  position: relative;
+  display: grid;
+  gap: clamp(20px, 3vw, 40px);
+}
+.ph__title {
+  font-size: min(15rem, calc(88vw / (var(--len) * 0.72)));
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+.ph__bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: end;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.ph__lede {
+  max-width: 58ch;
+  font-size: var(--fs-m);
+  line-height: 1.35;
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+.ph__aside {
+  text-align: right;
+}
+@media (max-width: 760px) {
+  .ph__bottom {
+    grid-template-columns: 1fr;
+  }
+  .ph__aside {
+    text-align: left;
+  }
+}

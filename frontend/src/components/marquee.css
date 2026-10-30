@@ -1,0 +1,14 @@
+.marquee {
+  overflow: hidden;
+  width: 100%;
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.marquee__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}

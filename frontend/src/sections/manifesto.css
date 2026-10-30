@@ -1,0 +1,79 @@
+.mani {
+  overflow-x: clip;
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  color: var(--fg);
+}
+.mani__inner {
+  position: relative;
+  padding-block: 14vh;
+}
+.mani__eyebrow {
+  margin-bottom: 4vh;
+}
+.mani__text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4.9vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  max-width: 17ch;
+  max-width: 1500px;
+}
+.mani__seg {
+  position: relative;
+}
+.mani__w {
+  display: inline-block;
+  white-space: pre;
+}
+.mani__seg.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.mani__seg.hl {
+  color: var(--maroon);
+}
+.mani__seg.hl-y {
+  position: relative;
+  color: var(--fg);
+  background: linear-gradient(transparent 62%, var(--yellow) 62% 92%, transparent 92%);
+}
+.mani__seg.strike {
+  color: var(--muted);
+}
+.mani__seg.strike .mani__w {
+  background: linear-gradient(var(--maroon), var(--maroon)) left 56% / calc(var(--strike, 0) * 100%) 0.07em no-repeat;
+}
+.mani__fillers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.mani__filler {
+  --cross: 0;
+  position: absolute;
+  font-size: clamp(0.8rem, 1.1vw, 1rem);
+  color: var(--maroon);
+  padding: 4px 10px;
+  border: 1px dashed currentColor;
+  border-radius: 999px;
+  background:
+    linear-gradient(currentColor, currentColor) left 50% / calc(var(--cross) * 100%) 1.5px no-repeat;
+}
+.mani__count {
+  margin-top: 6vh;
+  color: var(--muted);
+}
+.mani__count b {
+  color: var(--maroon);
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .mani__filler:nth-child(n + 4) {
+    display: none;
+  }
+}

@@ -1,0 +1,298 @@
+.anat {
+  position: relative;
+  overflow: hidden;
+  color: var(--fg);
+}
+.anat__track {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(16px, 2vw, 28px);
+  width: max-content;
+  height: 100svh;
+  padding: calc(var(--header-h) + 4vh) var(--gutter) 9vh;
+  will-change: transform;
+}
+.anat__intro {
+  width: min(560px, 80vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  padding-right: 4vw;
+}
+.anat__title {
+  font-size: clamp(3rem, 6.4vw, 7rem);
+}
+.anat__title .serif {
+  display: block;
+  color: var(--accent);
+}
+.anat__lede {
+  max-width: 38ch;
+}
+.anat__hint {
+  color: var(--accent);
+  animation: nudge 1.6s var(--ease) infinite;
+}
+@keyframes nudge {
+  50% { transform: translateX(10px); }
+}
+
+.anat__card {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(300px, 27vw, 420px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px;
+  border-radius: var(--radius);
+  /* opaque, so the outlined numeral below can knock out its own fill */
+  background: linear-gradient(180deg, color-mix(in srgb, #fff 5%, var(--bg)), color-mix(in srgb, #fff 1.5%, var(--bg)));
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color 0.5s var(--ease), transform 0.6s var(--ease);
+}
+/* content above the (now opaque) watermark numeral */
+.anat__card > :not(.anat__n) {
+  position: relative;
+  z-index: 1;
+}
+.anat__card:hover {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.anat__card:nth-of-type(3n + 1) {
+  margin-top: 4vh;
+}
+.anat__card:nth-of-type(3n + 2) {
+  margin-bottom: 4vh;
+}
+.anat__n {
+  position: absolute;
+  right: -0.1em;
+  top: -0.12em;
+  font-size: 13rem;
+  line-height: 1;
+  /* see .ph__index: stroke under an opaque fill hides the font's overlapping contours */
+  color: color-mix(in srgb, #fff 4.5%, var(--bg));
+  -webkit-text-stroke: 2px var(--line);
+  paint-order: stroke fill;
+  pointer-events: none;
+}
+.anat__role {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin-top: 8px;
+}
+.anat__verb {
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+.anat__body {
+  color: #c4c9cb;
+  max-width: 34ch;
+}
+.anat__widget {
+  margin-top: auto;
+  min-height: 150px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--line);
+  padding: 16px;
+}
+.anat__end {
+  width: min(520px, 80vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding-left: 4vw;
+}
+.anat__end .serif {
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 1;
+}
+.anat__progress {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 4vh;
+  height: 2px;
+  background: var(--line);
+}
+.anat__progress i {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* ---- widgets ---- */
+.rw {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.rw--vu {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 4px;
+  height: 90px;
+}
+.rw--vu span {
+  width: 6px;
+  border-radius: 3px;
+  background: linear-gradient(0deg, var(--go), var(--yellow) 70%, var(--stop));
+  animation: vu 0.9s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -0.13s);
+  height: 20%;
+}
+@keyframes vu {
+  0% { height: 12%; }
+  40% { height: 70%; }
+  100% { height: 35%; }
+}
+.rw__ring {
+  stroke-dasharray: 100;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  animation: ring 6s linear infinite;
+}
+@keyframes ring {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+.rw--topics {
+  min-height: 110px;
+  place-content: center;
+}
+.rw__topic {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  animation: rise 0.7s var(--ease);
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
+}
+.rw--eval {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.rw--eval span {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  animation: evalHi 3s infinite;
+  animation-delay: calc(var(--i) * 1s);
+}
+@keyframes evalHi {
+  0%, 30% { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+  34%, 100% { background: transparent; color: inherit; }
+}
+.rw__lights {
+  display: flex;
+  gap: 14px;
+}
+.rw__lights i {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #1b1d21;
+  transition: background-color 0.2s, box-shadow 0.3s;
+}
+.rw--timer.is-g .g { background: var(--go); box-shadow: 0 0 24px var(--go); }
+.rw--timer.is-y .y { background: var(--warn); box-shadow: 0 0 24px var(--warn); }
+.rw--timer.is-r .r { background: var(--stop); box-shadow: 0 0 24px var(--stop); }
+.rw__clock {
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.rw__ah-btns {
+  display: flex;
+  gap: 8px;
+}
+.rw__ah-btns button {
+  display: grid;
+  gap: 2px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  transition: background-color 0.3s, transform 0.2s;
+}
+.rw__ah-btns button:hover {
+  background: rgba(242, 223, 116, 0.1);
+}
+.rw__ah-btns button:active {
+  transform: scale(0.92);
+}
+.rw__ah-btns .serif {
+  font-size: 1.5rem;
+}
+.rw--word .rw__word .serif {
+  font-size: 2.2rem;
+  color: var(--accent);
+}
+.rw__word {
+  animation: rise 0.7s var(--ease);
+}
+.rw__def {
+  font-size: 0.9rem;
+  max-width: 28ch;
+}
+.rw--stars > div {
+  display: flex;
+  gap: 4px;
+}
+.rw--stars button {
+  font-size: 2rem;
+  color: var(--line);
+  transition: color 0.2s, transform 0.3s var(--ease);
+}
+.rw--stars button.on {
+  color: var(--yellow);
+  transform: scale(1.15);
+}
+
+@media (max-width: 899px) {
+  .anat__track {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    padding-block: 18vh 12vh;
+  }
+  .anat__card {
+    width: 100%;
+    margin: 0 !important;
+  }
+  .anat__intro,
+  .anat__end {
+    width: 100%;
+    padding: 0;
+  }
+  .anat__progress {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anat__track {
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    padding-block: 18vh 12vh;
+  }
+  .anat__progress {
+    display: none;
+  }
+}
